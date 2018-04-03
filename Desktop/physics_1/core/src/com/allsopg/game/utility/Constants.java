@@ -18,7 +18,7 @@ public class Constants {
     public static final float TILE_SIZE   = 32;
     public static final float UNITSCALE = 1.0f / TILE_SIZE;
     //Animation Speed
-    public static final float FRAME_DURATION = 1.0f / 30.0f;
+    public static final float FRAME_DURATION = 1.0f / 10.0f;
     public static final float TIME_STEP=1/60f;
     public static final int LEVEL_TIME = 30;
 
@@ -59,5 +59,5 @@ public class Constants {
     public static int CAR_PLATFORM_HEIGHT = 3;
     public static float CAR_PLATFORM_OFFSET_Y = 1.5f;
     public static float CAR_PLATFORM_OFFSET_X = 4.3f;
-    public static final Vector2 PLATFORM_POSITION = new Vector2(16,8);
+    public static final Vector2 PLATFORM_POSITION = new Vector2(0,8);
 }

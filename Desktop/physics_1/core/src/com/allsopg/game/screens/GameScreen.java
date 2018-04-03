@@ -60,6 +60,7 @@ public class GameScreen extends ScreenAdapter {
         smif = new PlayerCharacter(PLAYER_ATLAS_PATH,SMALL,START_POSITION);
 
         carPlat = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, START_POSITION, CAR_PLATFORM_REGION_LENGTHS);
+     
         carPlat2 = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, PLATFORM_POSITION, CAR_PLATFORM_REGION_LENGTHS);
         cameraManager = new CameraManager(game.camera,tiledMap);
         cameraManager.setTarget(smif);

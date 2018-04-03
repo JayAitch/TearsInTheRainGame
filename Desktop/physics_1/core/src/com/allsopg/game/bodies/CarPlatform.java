@@ -35,12 +35,13 @@ public class CarPlatform extends AnimatedSprite implements IWorldObject{
         super(t, pos);
         createAnimArrays(atlas, regionLengths);
         buildBody();
+        moveLeft();
     }
 
 
     public void buildBody() {
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
         bodyDef.position.set(getX()+ CAR_PLATFORM_OFFSET_X,getY()+ CAR_PLATFORM_OFFSET_Y);
         platformBody = WorldManager.getInstance().getWorld().createBody(bodyDef);
         platformBody.setUserData(this);
@@ -48,10 +49,7 @@ public class CarPlatform extends AnimatedSprite implements IWorldObject{
         platformBody.createFixture(getFixtureDef(DENSITY,FRICTION,RESTITUTION));
     }
 
-    @Override
-    public void update(float stateTime) {
-        super.update(stateTime);
-    }
+
 
     public FixtureDef getFixtureDef(float density, float friction, float restitution) {
         //prepare for Fixture definition
@@ -68,6 +66,11 @@ public class CarPlatform extends AnimatedSprite implements IWorldObject{
     @Override
     public void reaction() {
 
+    }
+    @Override
+    public void update(float stateTime) {
+        super.update(stateTime);
+        this.setPosition(platformBody.getPosition().x-CAR_PLATFORM_OFFSET_X,platformBody.getPosition().y-CAR_PLATFORM_OFFSET_Y);
     }
 
     private void createAnimArrays(String atlasString, int[]regionLengths){
@@ -86,6 +89,13 @@ public class CarPlatform extends AnimatedSprite implements IWorldObject{
         }
         animationInit(animationRegions.get(0), Animation.PlayMode.LOOP);
     }
+    private void moveLeft(){
+        Vector2 vel = platformBody.getLinearVelocity();
+        Vector2 pos = platformBody.getPosition();
+        platformBody.setLinearVelocity(3,0);
+
+    }
+
     //stub for changing animation
     private void changeAnimation(){
         animationInit(animationRegions.get(1), Animation.PlayMode.NORMAL);
