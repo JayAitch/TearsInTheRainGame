@@ -4,9 +4,13 @@ import com.allsopg.game.TBWGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+
+import java.util.Iterator;
+
 import static com.allsopg.game.utility.Constants.PHYSICS_MATERIALS_PATH;
 import static com.allsopg.game.utility.Constants.POSITION_ITERATIONS;
 import static com.allsopg.game.utility.Constants.TILE_SIZE;
@@ -25,9 +29,8 @@ public class WorldManager {
     private static TBWGame game;
     private MapBodyManager mapBodyManager;
     private static Map map;
-    private static boolean initialised=false;
-
-    private static WorldManager WORLDMANAGER;
+    private static boolean initialised = false;
+  private static WorldManager WORLDMANAGER;
 
     public static WorldManager getInstance(){
         if(WORLDMANAGER != null)return WORLDMANAGER;

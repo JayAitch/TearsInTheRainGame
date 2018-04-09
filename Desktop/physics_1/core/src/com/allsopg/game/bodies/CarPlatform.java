@@ -68,4 +68,15 @@ public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprit
     public void reaction() {
 
     }
+
+    public Vector2 getPos(){
+        return platformBody.getPosition();
+    }
+
+    public void dispose(){
+        WorldManager.getInstance().getWorld().destroyBody(platformBody);
+        platformBody.setUserData(null);
+        platformBody = null;
+
+    }
 }

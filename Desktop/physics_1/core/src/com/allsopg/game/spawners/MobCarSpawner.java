@@ -1,50 +1,81 @@
 package com.allsopg.game.spawners;
 
 import com.allsopg.game.bodies.CarPlatform;
+import com.allsopg.game.utility.Constants;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
+
+import java.sql.Time;
+import java.util.Random;
 
 import static com.allsopg.game.utility.Constants.CAR_SIZE;
 import static com.allsopg.game.utility.Constants.MOB_CAR_ATLAS_PATH;
-import static com.allsopg.game.utility.Constants.PLATFORM_POSITION;
 import static com.allsopg.game.utility.Constants.CAR_PLATFORM_REGION_LENGTHS;
+import static com.allsopg.game.utility.Constants.VIRTUAL_WIDTH;
 
-import static com.allsopg.game.utility.Constants.START_POSITION;
 
 /**
  * Created by Jordan Harrison on 09/04/2018.
  */
 
 public class MobCarSpawner {
-    private CarPlatform[] spawnedPlatforms;
-    private CarPlatform carPlat;
-    private CarPlatform carPlat2;
+    protected Array<CarPlatform> spawnedPlatforms;
     private SpriteBatch batch;
+    private Vector2 position;
+    private Random random;
 
     public MobCarSpawner(SpriteBatch spriteBatch) {
         batch = spriteBatch;
-        carPlat = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, START_POSITION, CAR_PLATFORM_REGION_LENGTHS);
-        carPlat2 = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, PLATFORM_POSITION, CAR_PLATFORM_REGION_LENGTHS);
-        TestArray();
+        spawnedPlatforms = new Array<CarPlatform>();
+        random = new Random();
+        tickMethod();
     }
 
-    public void TestArray() {
-        spawnedPlatforms = new CarPlatform[2];
-        spawnedPlatforms[0] = carPlat;
-        spawnedPlatforms[1] = carPlat2;
-        carPlat.moveLeft();
-        carPlat2.moveLeft();
-    }
+    public void SpawnCars(int amount) {
+        for(int i =0; i < amount; i++) {
+            position = new Vector2(0,random.nextInt(10));
+            CarPlatform tempCar = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, position, CAR_PLATFORM_REGION_LENGTHS);
+            tempCar.moveLeft();
+            spawnedPlatforms.add(tempCar);
 
-    public void update(float deltaTime) {
-        for(CarPlatform carP : spawnedPlatforms){
-            carP.update(deltaTime);
+
         }
 
     }
+    public void tickMethod(){
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                checkPositions();
+            }
+        },5,5);
+    }
+
+    public void checkPositions(){
+        for(int i = 0; i < spawnedPlatforms.size; i++){
+            CarPlatform tempMob = spawnedPlatforms.get(i);
+            if(tempMob.getPos().x > 2){
+                tempMob.dispose();
+                spawnedPlatforms.removeIndex(i);
+            }
+        }
+    }
+
+    public void update(float deltaTime) {
+        if (spawnedPlatforms != null) {
+            for(int i = 0; i < spawnedPlatforms.size; i++){
+                spawnedPlatforms.get(i).update(deltaTime);
+            }
+        }
+    }
 
     public void draw(){
-        for(CarPlatform carP : spawnedPlatforms){
-            carP.draw(batch);
+        if (spawnedPlatforms != null) {
+            for(int i = 0; i < spawnedPlatforms.size; i++){
+                spawnedPlatforms.get(i).draw(batch);
+            }
         }
     }
 }

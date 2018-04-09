@@ -93,5 +93,6 @@ public abstract class AnimatedSprite extends Sprite {
             return region1.name.compareTo(region2.name);
         }
     }
+    public void dispose(){}
 
 }

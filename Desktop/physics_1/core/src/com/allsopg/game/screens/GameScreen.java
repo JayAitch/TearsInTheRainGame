@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.utils.Timer;
 
 import static com.allsopg.game.utility.Constants.CAR_SIZE;
 import static com.allsopg.game.utility.Constants.MOB_CAR_ATLAS_PATH;
@@ -62,12 +63,20 @@ public class GameScreen extends ScreenAdapter {
         //player
         smif = new PlayerCharacter(PLAYER_ATLAS_PATH,CAR_SIZE,START_POSITION,PLAYER_CAR_REGION_LENGTHS);
         mobSpawner = new MobCarSpawner(game.batch);
-
+        spawnMobs();
         cameraManager = new CameraManager(game.camera,tiledMap);
         cameraManager.setTarget(smif);
         gameHUD = new HUD(game.batch,smif,game);
     }
 
+    public void spawnMobs(){
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                mobSpawner.SpawnCars(1);
+            }
+        },1,3);
+    }
     @Override
     public void render(float delta) {
         frameDelta += delta;
