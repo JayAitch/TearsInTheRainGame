@@ -2,8 +2,10 @@ package com.allsopg.game.screens;
 
 import com.allsopg.game.TBWGame;
 import com.allsopg.game.bodies.CarPlatform;
+import com.allsopg.game.SpriteClasses.MultiRegionSprite;
 import com.allsopg.game.bodies.PlayerCharacter;
 import com.allsopg.game.physics.WorldManager;
+import com.allsopg.game.spawners.MobCarSpawner;
 import com.allsopg.game.utility.CameraManager;
 import com.allsopg.game.utility.Constants;
 import com.allsopg.game.utility.HUD;
@@ -19,6 +21,7 @@ import static com.allsopg.game.utility.Constants.MOB_CAR_ATLAS_PATH;
 import static com.allsopg.game.utility.Constants.PLATFORM_POSITION;
 import static com.allsopg.game.utility.Constants.PLAYER_ATLAS_PATH;
 import static com.allsopg.game.utility.Constants.CAR_PLATFORM_REGION_LENGTHS;
+import static com.allsopg.game.utility.Constants.PLAYER_CAR_REGION_LENGTHS;
 import static com.allsopg.game.utility.Constants.SMALL;
 import static com.allsopg.game.utility.Constants.START_POSITION;
 import static com.allsopg.game.utility.Constants.UNITSCALE;
@@ -34,9 +37,9 @@ public class GameScreen extends ScreenAdapter {
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private PlayerCharacter smif;
-    private CarPlatform carPlat;
-    private CarPlatform carPlat2;
-
+    private MultiRegionSprite carPlat;
+    private MultiRegionSprite carPlat2;
+    private MobCarSpawner mobSpawner;
     private HUD gameHUD;
     private CameraManager cameraManager;
     private float frameDelta = 0;
@@ -57,11 +60,9 @@ public class GameScreen extends ScreenAdapter {
         orthogonalTiledMapRenderer.setView(game.camera);
         if(!WorldManager.isInitialised()){WorldManager.initialise(game,tiledMap);}
         //player
-        smif = new PlayerCharacter(PLAYER_ATLAS_PATH,SMALL,START_POSITION);
+        smif = new PlayerCharacter(PLAYER_ATLAS_PATH,CAR_SIZE,START_POSITION,PLAYER_CAR_REGION_LENGTHS);
+        mobSpawner = new MobCarSpawner(game.batch);
 
-        carPlat = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, START_POSITION, CAR_PLATFORM_REGION_LENGTHS);
-     
-        carPlat2 = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, PLATFORM_POSITION, CAR_PLATFORM_REGION_LENGTHS);
         cameraManager = new CameraManager(game.camera,tiledMap);
         cameraManager.setTarget(smif);
         gameHUD = new HUD(game.batch,smif,game);
@@ -71,8 +72,7 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta) {
         frameDelta += delta;
         smif.update(frameDelta);
-        carPlat.update(frameDelta);
-        carPlat2.update(frameDelta);
+        mobSpawner.update(frameDelta);
         gameHUD.update(delta);
         game.batch.setProjectionMatrix(game.camera.combined);
         clearScreen();
@@ -86,8 +86,7 @@ public class GameScreen extends ScreenAdapter {
         cameraManager.update();
         game.batch.begin();
         smif.draw(game.batch);
-        carPlat.draw(game.batch);
-        carPlat2.draw(game.batch);
+        mobSpawner.draw();
         game.batch.end();
         gameHUD.stage.draw();
         WorldManager.getInstance().debugRender();

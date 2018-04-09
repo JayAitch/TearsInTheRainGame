@@ -38,12 +38,13 @@ public class Constants {
     public static final float MAX_VELOCITY = 1f;
     public static final float MAX_HEIGHT = 18;
     //player body
-    public static int PLAYER_WIDTH= 3;
-    public static int PLAYER_HEIGHT=4;
-    public static float PLAYER_OFFSET_Y=2.15f;
-    public static float PLAYER_OFFSET_X=1.5f;
+    public static int PLAYER_WIDTH= 5;
+    public static int PLAYER_HEIGHT=  2;
+    public static float PLAYER_OFFSET_Y=0.8f;
+    public static float PLAYER_OFFSET_X= 2.5f;
     //player graphics
-    public static final String PLAYER_ATLAS_PATH = "gfx/smurf_assets.atlas";
+    public static final String PLAYER_ATLAS_PATH = "gfx/Playercar/playerCar.atlas";
+    public static final int[] PLAYER_CAR_REGION_LENGTHS = {4,9};
     public static final Texture MEDIUM = new Texture(Gdx.files.internal("gfx/mediumSize.png"));
     public static final Texture SMALL = new Texture(Gdx.files.internal("gfx/smallSize.png"));
     public static final Texture TINY = new Texture(Gdx.files.internal("gfx/tinySize.png"));
@@ -55,9 +56,9 @@ public class Constants {
     //car platform
     public static final int[] CAR_PLATFORM_REGION_LENGTHS = {4,13};
     public static final String MOB_CAR_ATLAS_PATH = "gfx/MobCar/mob_car.atlas";
-    public static int CAR_PLATFORM_WIDTH = 7;
-    public static int CAR_PLATFORM_HEIGHT = 3;
-    public static float CAR_PLATFORM_OFFSET_Y = 1.5f;
-    public static float CAR_PLATFORM_OFFSET_X = 4.3f;
+    public static int CAR_PLATFORM_WIDTH = 5;
+    public static int CAR_PLATFORM_HEIGHT = 2;
+    public static float CAR_PLATFORM_OFFSET_Y = 1f;
+    public static float CAR_PLATFORM_OFFSET_X = 3f;
     public static final Vector2 PLATFORM_POSITION = new Vector2(0,8);
 }

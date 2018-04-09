@@ -17,8 +17,10 @@ import static com.allsopg.game.utility.Constants.FORCE_Y;
 import static com.allsopg.game.utility.Constants.FRICTION;
 import static com.allsopg.game.utility.Constants.MAX_HEIGHT;
 import static com.allsopg.game.utility.Constants.MAX_VELOCITY;
+import static com.allsopg.game.utility.Constants.PLAYER_HEIGHT;
 import static com.allsopg.game.utility.Constants.PLAYER_OFFSET_X;
 import static com.allsopg.game.utility.Constants.PLAYER_OFFSET_Y;
+import static com.allsopg.game.utility.Constants.PLAYER_WIDTH;
 import static com.allsopg.game.utility.Constants.RESTITUTION;
 
 /**
@@ -26,12 +28,12 @@ import static com.allsopg.game.utility.Constants.RESTITUTION;
  * Updated 02/03/18
  */
 
-public class PlayerCharacter extends AnimatedSprite implements IWorldObject {
+public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionSprite implements IWorldObject {
     private Body playerBody;
     private boolean facingRight =true;
 
-    public PlayerCharacter(String atlas, Texture t, Vector2 pos) {
-        super(atlas, t, pos);
+    public PlayerCharacter(String atlas, Texture t, Vector2 pos, int[] regionLengths) {
+        super(atlas, t, pos ,regionLengths, PLAYER_WIDTH, PLAYER_HEIGHT);
         buildBody();
     }
 
@@ -40,7 +42,6 @@ public class PlayerCharacter extends AnimatedSprite implements IWorldObject {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(getX(),getY());
-
         playerBody = WorldManager.getInstance().getWorld().createBody(bodyDef);
         playerBody.setUserData(this);
         playerBody.setFixedRotation(true);
@@ -89,7 +90,7 @@ public class PlayerCharacter extends AnimatedSprite implements IWorldObject {
     public FixtureDef getFixtureDef(float density, float friction, float restitution) {
         //prepare for Fixture definition
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox((getWidth()/2)-.75f,getHeight()/2);
+        shape.setAsBox(getWidth()/2.7f, getHeight()/4.9f);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = density;

@@ -1,0 +1,97 @@
+
+playerCar.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Player_Car_death00
+  rotate: false
+  xy: 2, 134
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_death01
+  rotate: false
+  xy: 2, 68
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_death02
+  rotate: false
+  xy: 132, 134
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_death03
+  rotate: false
+  xy: 2, 2
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_death04
+  rotate: false
+  xy: 132, 68
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_death05
+  rotate: false
+  xy: 262, 134
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_death6
+  rotate: false
+  xy: 132, 2
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_death7
+  rotate: false
+  xy: 262, 68
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_death8
+  rotate: false
+  xy: 392, 134
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_idle00
+  rotate: false
+  xy: 262, 2
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_idle02
+  rotate: false
+  xy: 262, 2
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_idle01
+  rotate: false
+  xy: 392, 68
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+Player_Car_idle03
+  rotate: false
+  xy: 522, 134
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1

@@ -1,4 +1,4 @@
-package com.allsopg.game.bodies;
+package com.allsopg.game.SpriteClasses;
 
 import com.allsopg.game.utility.Constants;
 import com.badlogic.gdx.Gdx;
@@ -28,16 +28,32 @@ public abstract class AnimatedSprite extends Sprite {
     protected Animation.PlayMode playmode;
     private TextureAtlas atlas;
 
-    public AnimatedSprite(String atlasString, Texture t, Vector2 pos){
-        super(t,PLAYER_WIDTH,PLAYER_HEIGHT);
+    /**
+     * Generates an animation in Normal playmode with sizing done through, t, height and width
+     * Animation generated and initiated, consististing of every frame in atlas
+     * @param t initial sizing texture
+     * @param pos Start Postion of object
+     * @param width Width modifier
+     * @param height Hieght modifier
+     */
+    public AnimatedSprite(String atlasString, Texture t, Vector2 pos, int width, int height){
+        super(t,width, height);
         this.setX(pos.x);
         this.setY(pos.y);
         playmode = Animation.PlayMode.NORMAL;
         initAtlas(atlasString);
     }
 
-    public AnimatedSprite(Texture t, Vector2 pos){
-        super(t,CAR_PLATFORM_WIDTH,CAR_PLATFORM_HEIGHT);
+    /**
+     * Generates an animation in Normal playmode with sizing done through, t, height and width
+     * does not generate an animation by default this needs to be done in extended class
+     * @param t initial sizing texture
+     * @param pos Start Postion of object
+     * @param width Width modifier
+     * @param height Hieght modifier
+     */
+    public AnimatedSprite(Texture t, Vector2 pos, int width, int height){
+        super(t, width, height);
         this.setX(pos.x);
         this.setY(pos.y);
         playmode = Animation.PlayMode.LOOP;
@@ -47,6 +63,10 @@ public abstract class AnimatedSprite extends Sprite {
         this.setRegion((TextureRegion) animation.getKeyFrame(animationTime));
     }
 
+    /**
+     * Generates an animation that consist of the entire atlas
+     * @param atlasString
+     */
     private void initAtlas(String atlasString){
         atlas = new TextureAtlas(Gdx.files.internal(atlasString));
         //load animations
@@ -56,6 +76,12 @@ public abstract class AnimatedSprite extends Sprite {
         animation = new Animation(FRAME_DURATION,regions, Animation.PlayMode.NORMAL);
     }
 
+    /**
+     * animation init for use with second constructor
+     * Should be called via the extended class after generating animation regions
+     * @param regions
+     * @param loopType
+     */
     protected void animationInit(Array<TextureAtlas.AtlasRegion> regions, Animation.PlayMode loopType) {
         regions.sort(new RegionComparator());
         animation = new Animation(Constants.FRAME_DURATION, regions, loopType);
