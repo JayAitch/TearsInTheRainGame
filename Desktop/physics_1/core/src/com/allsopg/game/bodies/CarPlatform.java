@@ -53,10 +53,10 @@ public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprit
         platformBody.createFixture(getFixtureDef(DENSITY,FRICTION,RESTITUTION));
     }
 
-    public void moveLeft(){
+    public void moveLeft(float xVelocity){
         Vector2 vel = platformBody.getLinearVelocity();
         Vector2 pos = platformBody.getPosition();
-        platformBody.setLinearVelocity(3,0);
+        platformBody.setLinearVelocity(xVelocity,0);
 
     }
     @Override

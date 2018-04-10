@@ -35,9 +35,9 @@ public class MobCarSpawner {
 
     public void SpawnCars(int amount) {
         for(int i =0; i < amount; i++) {
-            position = new Vector2(0,random.nextInt(10));
+            position = new Vector2(0,(random.nextInt(10)+5));
             CarPlatform tempCar = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, position, CAR_PLATFORM_REGION_LENGTHS);
-            tempCar.moveLeft();
+            tempCar.moveLeft(random.nextInt(6)+3);
             spawnedPlatforms.add(tempCar);
 
 
@@ -50,13 +50,15 @@ public class MobCarSpawner {
             public void run() {
                 checkPositions();
             }
-        },5,5);
+        },5,2);
     }
 
     public void checkPositions(){
         for(int i = 0; i < spawnedPlatforms.size; i++){
             CarPlatform tempMob = spawnedPlatforms.get(i);
-            if(tempMob.getPos().x > 2){
+            if(tempMob.getPos().x > 100){
+                System.out.println(Constants.VIRTUAL_WIDTH);
+                System.out.println(tempMob.getPos().x);
                 tempMob.dispose();
                 spawnedPlatforms.removeIndex(i);
             }

@@ -38,8 +38,6 @@ public class GameScreen extends ScreenAdapter {
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private PlayerCharacter smif;
-    private MultiRegionSprite carPlat;
-    private MultiRegionSprite carPlat2;
     private MobCarSpawner mobSpawner;
     private HUD gameHUD;
     private CameraManager cameraManager;

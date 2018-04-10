@@ -20,7 +20,7 @@ public class Constants {
     //Animation Speed
     public static final float FRAME_DURATION = 1.0f / 10.0f;
     public static final float TIME_STEP=1/60f;
-    public static final int LEVEL_TIME = 30;
+    public static final int LEVEL_TIME = 300;
 
     public static final int VELOCITY_ITERATIONS = 6;
     public static final int POSITION_ITERATIONS = 2;
