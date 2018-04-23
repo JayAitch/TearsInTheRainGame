@@ -61,4 +61,11 @@ public class Constants {
     public static float CAR_PLATFORM_OFFSET_Y = 1f;
     public static float CAR_PLATFORM_OFFSET_X = 3f;
     public static final Vector2 PLATFORM_POSITION = new Vector2(0,8);
+
+    //spawn constants
+    //randoms for speed Random: speed = random(range)+ mod
+    public static final int CAR_SPEED_RANGE = 6;
+    public static final int CAR_SPEED_MOD = 3;
+    // tick used to scan for out of bound objects
+    public static final int SPAWNER_SCAN_TICK = 2;
 }

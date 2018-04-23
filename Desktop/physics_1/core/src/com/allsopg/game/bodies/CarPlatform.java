@@ -1,8 +1,10 @@
 package com.allsopg.game.bodies;
 
 import com.allsopg.game.physics.WorldManager;
+import com.allsopg.game.spawners.IMovingSpawnable;
 import com.allsopg.game.utility.IWorldObject;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -21,7 +23,7 @@ import static com.allsopg.game.utility.Constants.RESTITUTION;
  * Created by Jordan Harrison on 09/04/2018.
  */
 
-public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprite implements IWorldObject {
+public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprite implements IWorldObject, IMovingSpawnable {
 
     private Body platformBody;
 
@@ -53,7 +55,7 @@ public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprit
         platformBody.createFixture(getFixtureDef(DENSITY,FRICTION,RESTITUTION));
     }
 
-    public void moveLeft(float xVelocity){
+    public void moveSpawnable(float xVelocity){
         Vector2 vel = platformBody.getLinearVelocity();
         Vector2 pos = platformBody.getPosition();
         platformBody.setLinearVelocity(xVelocity,0);
@@ -68,8 +70,11 @@ public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprit
     public void reaction() {
 
     }
+    public void draw(SpriteBatch batch){
+        super.draw(batch);
+    }
 
-    public Vector2 getPos(){
+    public Vector2 getPosition(){
         return platformBody.getPosition();
     }
 
@@ -77,6 +82,5 @@ public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprit
         WorldManager.getInstance().getWorld().destroyBody(platformBody);
         platformBody.setUserData(null);
         platformBody = null;
-
     }
 }
