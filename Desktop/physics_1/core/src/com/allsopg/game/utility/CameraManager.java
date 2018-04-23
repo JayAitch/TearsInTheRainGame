@@ -36,13 +36,17 @@ public class CameraManager {
     }
     public void update () {
         if (!hasTarget()) return;
-        if(cameraTrackX()|| cameraTrackY()) {
+        if (cameraTrackX()) {
             position.x = target.getX() + target.getOriginX();
-            position.y = target.getY() + target.getOriginY();
-            camera.position.set(position.x, position.y, 0);
+            camera.position.set(position.x, camera.position.y, 0);
             camera.update();
         }
-    }
+        if(cameraTrackY()) {
+            position.y = target.getY() + target.getOriginY();
+            camera.position.set(camera.position.x, position.y, 0);
+        }
+
+}
 
     public void setTarget (Sprite target) { this.target = target; }
     public boolean hasTarget () { return target != null; }

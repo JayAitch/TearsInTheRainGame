@@ -72,9 +72,9 @@ public class GameScreen extends ScreenAdapter {
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                mobSpawner.SpawnCars(2);
+                mobSpawner.SpawnCars(1);
             }
-        },1,3);
+        },1,5);
     }
 
     @Override
