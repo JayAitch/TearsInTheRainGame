@@ -20,14 +20,14 @@ import static com.allsopg.game.utility.Constants.SPAWNER_SCAN_TICK;
  *
  * Created by Jordan Harrison on 09/04/2018.
  */
-public class MobCarSpawner {
+public class MobSpawner {
     protected Array<IMovingSpawnable> spawnedPlatforms;
     private SpriteBatch batch;
     private Vector2 position;
     private Random random;
 
     // generates an array for sprites and initiates tick method
-    public MobCarSpawner(SpriteBatch spriteBatch) {
+    public MobSpawner(SpriteBatch spriteBatch) {
         batch = spriteBatch;
         spawnedPlatforms = new Array<IMovingSpawnable>();
         random = new Random();

@@ -1,6 +1,7 @@
 package com.allsopg.game.physics;
 
 import com.allsopg.game.bodies.CarPlatform;
+import com.allsopg.game.bodies.PlayerCharacter;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -15,21 +16,8 @@ public class ContactListenerClass implements com.badlogic.gdx.physics.box2d.Cont
 
     // when any objects contact this method is fired
     public void beginContact(Contact contact){
-        Fixture fixture1 = contact.getFixtureA();
-        Fixture fixture2 = contact.getFixtureB();
-       // if(fixture1.getBody().getType() == BodyDef.BodyType.KinematicBody && fixture2.getBody().getType() == BodyDef.BodyType.KinematicBody) {
-            try {
-                ((CarPlatform) fixture1.getBody().getUserData()).reaction();
-            } catch (Exception e) {
-                System.out.println("not a car");
-            }
-            try {
-                ((CarPlatform) fixture2.getBody().getUserData()).reaction();
-            } catch (Exception e) {
-            System.out.println("not a car");
-            }
 
-        System.out.println(fixture1.getBody().getType()+" has hit "+ fixture2.getBody().getType());
+        resolveCollision(contact.getFixtureA(), contact.getFixtureB());
     }
     public void endContact(Contact contact){
 
@@ -39,5 +27,31 @@ public class ContactListenerClass implements com.badlogic.gdx.physics.box2d.Cont
     }
     public void postSolve(Contact contact, ContactImpulse contactImpulse){
 
+    }
+    private void resolveCollision(Fixture fixtureA, Fixture fixtureB){
+        if(fixtureA.getBody().getType() == BodyDef.BodyType.DynamicBody && fixtureB.getBody().getType() == BodyDef.BodyType.KinematicBody) {
+            try {
+                ((CarPlatform) fixtureB.getBody().getUserData()).reaction();
+            } catch (Exception e) {
+                System.out.println("not a car");
+            }
+            try {
+                ((PlayerCharacter) fixtureA.getBody().getUserData()).reaction();
+            } catch (Exception e) {
+                System.out.println("not a car");
+            }
+        }
+        if(fixtureB.getBody().getType() == BodyDef.BodyType.DynamicBody && fixtureA.getBody().getType() == BodyDef.BodyType.KinematicBody) {
+            try {
+                ((CarPlatform) fixtureA.getBody().getUserData()).reaction();
+            } catch (Exception e) {
+                System.out.println("not a car");
+            }
+            try {
+                ((PlayerCharacter) fixtureB.getBody().getUserData()).reaction();
+            } catch (Exception e) {
+                System.out.println("not a car");
+            }
+        }
     }
 }

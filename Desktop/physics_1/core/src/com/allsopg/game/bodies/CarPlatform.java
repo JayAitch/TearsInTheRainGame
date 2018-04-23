@@ -32,7 +32,6 @@ import static com.allsopg.game.utility.Constants.RESTITUTION;
 public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprite implements IWorldObject, IMovingSpawnable {
 
     private Body platformBody;
-    private float frameTimer;
     public boolean isDead;
 
     public CarPlatform(String atlas, Texture t, Vector2 pos, int[] regionLengths){
@@ -70,8 +69,7 @@ public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprit
 
     @Override
     public void update(float stateTime) {
-        frameTimer += Gdx.graphics.getDeltaTime();
-        super.update(frameTimer);
+        super.update(stateTime);
         this.setPosition(platformBody.getPosition().x-CAR_PLATFORM_OFFSET_X,platformBody.getPosition().y-CAR_PLATFORM_OFFSET_Y);
     }
     // crash reaction resolved by contactlistenerclass passed to world manager

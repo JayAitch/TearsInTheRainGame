@@ -1,11 +1,9 @@
 package com.allsopg.game.screens;
 
 import com.allsopg.game.TBWGame;
-import com.allsopg.game.bodies.CarPlatform;
-import com.allsopg.game.SpriteClasses.MultiRegionSprite;
 import com.allsopg.game.bodies.PlayerCharacter;
 import com.allsopg.game.physics.WorldManager;
-import com.allsopg.game.spawners.MobCarSpawner;
+import com.allsopg.game.spawners.MobSpawner;
 import com.allsopg.game.utility.CameraManager;
 import com.allsopg.game.utility.Constants;
 import com.allsopg.game.utility.HUD;
@@ -18,12 +16,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Timer;
 
 import static com.allsopg.game.utility.Constants.CAR_SIZE;
-import static com.allsopg.game.utility.Constants.MOB_CAR_ATLAS_PATH;
-import static com.allsopg.game.utility.Constants.PLATFORM_POSITION;
 import static com.allsopg.game.utility.Constants.PLAYER_ATLAS_PATH;
-import static com.allsopg.game.utility.Constants.CAR_PLATFORM_REGION_LENGTHS;
 import static com.allsopg.game.utility.Constants.PLAYER_CAR_REGION_LENGTHS;
-import static com.allsopg.game.utility.Constants.SMALL;
 import static com.allsopg.game.utility.Constants.START_POSITION;
 import static com.allsopg.game.utility.Constants.UNITSCALE;
 import static com.allsopg.game.utility.Constants.VIRTUAL_HEIGHT;
@@ -38,7 +32,7 @@ public class GameScreen extends ScreenAdapter {
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
     private PlayerCharacter smif;
-    private MobCarSpawner mobSpawner;
+    private MobSpawner mobSpawner;
     private HUD gameHUD;
     private CameraManager cameraManager;
     private float frameDelta = 0;
@@ -60,7 +54,7 @@ public class GameScreen extends ScreenAdapter {
         if(!WorldManager.isInitialised()){WorldManager.initialise(game,tiledMap);}
         //player
         smif = new PlayerCharacter(PLAYER_ATLAS_PATH,CAR_SIZE,START_POSITION,PLAYER_CAR_REGION_LENGTHS);
-        mobSpawner = new MobCarSpawner(game.batch);
+        mobSpawner = new MobSpawner(game.batch);
         spawnMobs();
         cameraManager = new CameraManager(game.camera,tiledMap);
         cameraManager.setTarget(smif);

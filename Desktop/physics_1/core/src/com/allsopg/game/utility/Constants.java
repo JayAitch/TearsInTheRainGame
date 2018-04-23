@@ -27,13 +27,11 @@ public class Constants {
 
     public static final String BACKGROUND = "tileData/assignment_two.tmx";
     public static final String PHYSICS_MATERIALS_PATH = "tileData/physicsData.json";
-
+    //Constants for bodies
     public static final float DENSITY=.5f;
     public static final float FRICTION=.5f;
     public static final float RESTITUTION=.5f;
-    //impulse strength
-    public static final float FORCE_X=30f;
-    public static final float FORCE_Y=30f;
+
     //Speed
     public static final float MAX_VELOCITY = 1f;
     public static final float MAX_HEIGHT = 18;
@@ -51,9 +49,12 @@ public class Constants {
     public static final Texture CAR_SIZE = new Texture(Gdx.files.internal("gfx/carSize.png"));
     //player start position
     public static final Vector2 START_POSITION = new Vector2(10,10);
-
-
-    //car platform
+    //player Stats
+        //impulse strength
+    public static final float BASE_X_FORCE =30f;
+    public static final float BASE_FORCE_Y =30f;
+    public static final int PLAYER_MAX_LIFE = 5;
+    //car platform graphics
     public static final int[] CAR_PLATFORM_REGION_LENGTHS = {4,13};
     public static final String MOB_CAR_ATLAS_PATH = "gfx/MobCar/mob_car.atlas";
     public static int CAR_PLATFORM_WIDTH = 5;
@@ -61,6 +62,7 @@ public class Constants {
     public static float CAR_PLATFORM_OFFSET_Y = 1f;
     public static float CAR_PLATFORM_OFFSET_X = 3f;
     public static final Vector2 PLATFORM_POSITION = new Vector2(0,8);
+
 
     //spawn constants
     //randoms for speed Random: speed = random(range)+ mod

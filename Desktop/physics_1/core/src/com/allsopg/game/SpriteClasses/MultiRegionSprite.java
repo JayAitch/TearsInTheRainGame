@@ -18,6 +18,7 @@ import java.util.Map;
 public abstract class MultiRegionSprite extends AnimatedSprite{
     private Array<TextureAtlas.AtlasRegion> regions;
     private Map<Integer,Array<TextureAtlas.AtlasRegion>> animationRegions;
+    public  float frameTimer;
 
     public MultiRegionSprite(String atlas, Texture t, Vector2 pos, int[] regionLengths, int width, int height){
         super(t, pos, width, height);
@@ -25,8 +26,10 @@ public abstract class MultiRegionSprite extends AnimatedSprite{
     }
     @Override
     public void update(float stateTime) {
-        super.update(stateTime);
+        frameTimer += Gdx.graphics.getDeltaTime();
+        super.update(frameTimer);
     }
+
 // generate multiple animation regions based on the array passed into the constructor
     private void createAnimArrays(String atlasString, int[]regionLengths){
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(atlasString));
