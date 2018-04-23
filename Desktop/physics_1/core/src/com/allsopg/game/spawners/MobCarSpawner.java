@@ -34,6 +34,7 @@ public class MobCarSpawner {
         tickMethod();
     }
 
+    //spawn cars based on the int passed in position is currently stubbed
     public void SpawnCars(int amount) {
         for(int i =0; i < amount; i++) {
             position = new Vector2(0,(random.nextInt(10)+5));
@@ -57,6 +58,7 @@ public class MobCarSpawner {
         for(int i = 0; i < spawnedPlatforms.size; i++){
             IMovingSpawnable tempMob = spawnedPlatforms.get(i);
             if(tempMob.getPosition().x > 100){   //if out of bounds
+                System.out.println(tempMob.getPosition().x);
                 // calls dispose on object
                 tempMob.dispose();
                 spawnedPlatforms.removeIndex(i);

@@ -4,12 +4,9 @@ import com.allsopg.game.TBWGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-
-import java.util.Iterator;
 
 import static com.allsopg.game.utility.Constants.PHYSICS_MATERIALS_PATH;
 import static com.allsopg.game.utility.Constants.POSITION_ITERATIONS;
@@ -45,10 +42,13 @@ public class WorldManager {
         gravity = new Vector2(0,-9.8f);
         Box2D.init();
         world = new World(gravity, true);
+        // contact lister class as the contact manager
+        world.setContactListener(new ContactListenerClass());
         mapBodyManager = new MapBodyManager(world, TILE_SIZE, Gdx.files.internal(PHYSICS_MATERIALS_PATH));
         mapBodyManager.createPhysics(map,"physics");
         debugRenderer = new Box2DDebugRenderer();
     }
+
 
     public static void initialise(TBWGame aGame, Map aMap){
         game = aGame;

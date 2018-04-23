@@ -67,14 +67,16 @@ public class GameScreen extends ScreenAdapter {
         gameHUD = new HUD(game.batch,smif,game);
     }
 
+    // stubbed call to spawn cars
     public void spawnMobs(){
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                mobSpawner.SpawnCars(1);
+                mobSpawner.SpawnCars(2);
             }
         },1,3);
     }
+
     @Override
     public void render(float delta) {
         frameDelta += delta;

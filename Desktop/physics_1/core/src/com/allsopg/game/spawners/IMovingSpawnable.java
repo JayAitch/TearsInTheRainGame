@@ -8,10 +8,10 @@ import com.badlogic.gdx.math.Vector2;
  */
 
 public interface IMovingSpawnable {
-    public void update(float stateTime);
-    public void dispose();
-    public void moveSpawnable(float xVelocity);
-    public void draw(SpriteBatch batch);
-    public Vector2 getPosition();
+     void update(float stateTime);
+     void dispose();
+     void moveSpawnable(float xVelocity);
+     void draw(SpriteBatch batch);
+     Vector2 getPosition();
 
 }

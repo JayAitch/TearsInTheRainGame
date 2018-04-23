@@ -27,7 +27,7 @@ public abstract class MultiRegionSprite extends AnimatedSprite{
     public void update(float stateTime) {
         super.update(stateTime);
     }
-
+// generate multiple animation regions based on the array passed into the constructor
     private void createAnimArrays(String atlasString, int[]regionLengths){
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(atlasString));
         regions = new Array<TextureAtlas.AtlasRegion>(atlas.getRegions());
@@ -47,7 +47,7 @@ public abstract class MultiRegionSprite extends AnimatedSprite{
 
 
     //stub for changing animation
-    private void changeAnimation(){
+    protected void changeAnimation(){
         animationInit(animationRegions.get(1), Animation.PlayMode.NORMAL);
     }
 }

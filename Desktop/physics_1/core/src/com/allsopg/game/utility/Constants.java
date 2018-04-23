@@ -67,5 +67,5 @@ public class Constants {
     public static final int CAR_SPEED_RANGE = 6;
     public static final int CAR_SPEED_MOD = 3;
     // tick used to scan for out of bound objects
-    public static final int SPAWNER_SCAN_TICK = 2;
+    public static final float SPAWNER_SCAN_TICK = 0.25f;
 }
