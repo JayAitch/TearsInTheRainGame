@@ -34,18 +34,15 @@ public class CameraManager {
         position = new Vector2();
 
     }
+    //update camera based on player position
     public void update () {
         if (!hasTarget()) return;
-        if (cameraTrackX()) {
+        if (cameraTrackX()||cameraTrackY()) {
             position.x = target.getX() + target.getOriginX();
-            camera.position.set(position.x, camera.position.y, 0);
+            position.y = target.getY() + target.getOriginY();
+            camera.position.set(position.x, position.y, 0);
             camera.update();
         }
-        if(cameraTrackY()) {
-            position.y = target.getY() + target.getOriginY();
-            camera.position.set(camera.position.x, position.y, 0);
-        }
-
 }
 
     public void setTarget (Sprite target) { this.target = target; }

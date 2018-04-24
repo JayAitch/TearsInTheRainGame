@@ -17,7 +17,8 @@ import static com.allsopg.game.utility.Constants.SPAWNER_SCAN_TICK;
 
 
 /**
- *
+ * Currently spawning and checking for out of bounds IMovingSpawnables
+ * extension will require impementation of poolable interface
  * Created by Jordan Harrison on 09/04/2018.
  */
 public class MobSpawner {
@@ -54,6 +55,7 @@ public class MobSpawner {
         },5,SPAWNER_SCAN_TICK);
     }
 
+    // check whether all mobs in the list are out of bounds
     public void checkPositions(){
         for(int i = 0; i < spawnedPlatforms.size; i++){
             IMovingSpawnable tempMob = spawnedPlatforms.get(i);
@@ -65,7 +67,7 @@ public class MobSpawner {
             }
         }
     }
-
+    //update whole list
     public void update(float deltaTime) {
         if (spawnedPlatforms != null) {
             for(int i = 0; i < spawnedPlatforms.size; i++){
@@ -73,7 +75,7 @@ public class MobSpawner {
             }
         }
     }
-
+    // draw whole list
     public void draw(){
         if (spawnedPlatforms != null) {
             for(int i = 0; i < spawnedPlatforms.size; i++){
