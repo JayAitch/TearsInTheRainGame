@@ -170,7 +170,7 @@ public class HUD implements Disposable {
             timeCount = 0;
         }
     }
-
+    // concider modifying this to display health
     public static void addScore(int value) {
         score += value;
         scoreLabel.setText(String.format("%06d", score));

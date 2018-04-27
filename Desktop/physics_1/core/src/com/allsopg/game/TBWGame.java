@@ -1,5 +1,6 @@
 package com.allsopg.game;
 
+import com.allsopg.game.screens.EndScreen;
 import com.allsopg.game.screens.MainMenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
@@ -38,7 +39,9 @@ public class TBWGame extends Game {
         font = new BitmapFont();
         setScreen(new MainMenuScreen(this));
     }
-
+    public void endGame(){
+        setScreen(new EndScreen());
+    }
     public AssetManager getAssetManager() {
         return assetManager;
     }

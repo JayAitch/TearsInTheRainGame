@@ -31,7 +31,7 @@ public class GameScreen extends ScreenAdapter {
     private TBWGame game;
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer orthogonalTiledMapRenderer;
-    private PlayerCharacter smif;
+    private PlayerCharacter playerCar;
     private MobSpawner mobSpawner;
     private HUD gameHUD;
     private CameraManager cameraManager;
@@ -53,12 +53,12 @@ public class GameScreen extends ScreenAdapter {
         orthogonalTiledMapRenderer.setView(game.camera);
         if(!WorldManager.isInitialised()){WorldManager.initialise(game,tiledMap);}
         //player
-        smif = new PlayerCharacter(PLAYER_ATLAS_PATH,CAR_SIZE,START_POSITION,PLAYER_CAR_REGION_LENGTHS);
+        playerCar = new PlayerCharacter(PLAYER_ATLAS_PATH,CAR_SIZE,START_POSITION,PLAYER_CAR_REGION_LENGTHS, game);
         mobSpawner = new MobSpawner(game.batch);
         spawnMobs();
         cameraManager = new CameraManager(game.camera,tiledMap);
-        cameraManager.setTarget(smif);
-        gameHUD = new HUD(game.batch,smif,game);
+        cameraManager.setTarget(playerCar);
+        gameHUD = new HUD(game.batch, playerCar,game);
     }
 
     // stubbed call to spawn cars
@@ -69,12 +69,12 @@ public class GameScreen extends ScreenAdapter {
                 mobSpawner.SpawnCars(1);
             }
         },1,5);
-    }
+          }
 
     @Override
     public void render(float delta) {
         frameDelta += delta;
-        smif.update(frameDelta);
+        playerCar.update(frameDelta);
         mobSpawner.update(frameDelta);
         gameHUD.update(delta);
         game.batch.setProjectionMatrix(game.camera.combined);
@@ -88,7 +88,7 @@ public class GameScreen extends ScreenAdapter {
        orthogonalTiledMapRenderer.render();
         cameraManager.update();
         game.batch.begin();
-        smif.draw(game.batch);
+        playerCar.draw(game.batch);
         mobSpawner.draw();
         game.batch.end();
         gameHUD.stage.draw();

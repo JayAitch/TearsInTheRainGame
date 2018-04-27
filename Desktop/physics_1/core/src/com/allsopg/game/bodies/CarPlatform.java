@@ -1,5 +1,6 @@
 package com.allsopg.game.bodies;
 
+import com.allsopg.game.TBWGame;
 import com.allsopg.game.physics.WorldManager;
 import com.allsopg.game.spawners.IMovingSpawnable;
 import com.allsopg.game.utility.IWorldObject;
@@ -35,7 +36,6 @@ public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprit
 
     private Body platformBody;
     public boolean isDead;
-
     /**
      *
      * @param atlas atlas location for the animaiton

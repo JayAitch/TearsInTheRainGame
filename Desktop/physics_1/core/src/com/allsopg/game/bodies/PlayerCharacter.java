@@ -1,5 +1,6 @@
 package com.allsopg.game.bodies;
 
+import com.allsopg.game.TBWGame;
 import com.allsopg.game.physics.WorldManager;
 import com.allsopg.game.utility.CurrentDirection;
 import com.allsopg.game.utility.IWorldObject;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.utils.Timer;
 
 import static com.allsopg.game.utility.Constants.DENSITY;
 import static com.allsopg.game.utility.Constants.BASE_X_FORCE;
@@ -30,6 +32,7 @@ import static com.allsopg.game.utility.Constants.RESTITUTION;
  */
 
 public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionSprite implements IWorldObject {
+    private TBWGame gameRef;
     private Body playerBody;
     private boolean facingRight = true;
 
@@ -37,8 +40,9 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
     private float ySpeed;
     private int health;
 
-    public PlayerCharacter(String atlas, Texture t, Vector2 pos, int[] regionLengths) {
+    public PlayerCharacter(String atlas, Texture t, Vector2 pos, int[] regionLengths, TBWGame game) {
         super(atlas, t, pos ,regionLengths, PLAYER_WIDTH, PLAYER_HEIGHT);
+        gameRef = game;
         initiatePlayerStats();
         buildBody();
     }
@@ -117,6 +121,12 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
         }else {
             frameTimer = 0;
             changeAnimation();
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    gameRef.endGame();
+                }
+            },2f); // end game after 2 seconds
         }
     }
 }
