@@ -1,5 +1,6 @@
 package com.allsopg.game;
 
+import com.allsopg.game.Sound.SoundPlayer;
 import com.allsopg.game.screens.EndScreen;
 import com.allsopg.game.screens.MainMenuScreen;
 import com.badlogic.gdx.Game;
@@ -23,12 +24,14 @@ import static com.allsopg.game.utility.Constants.VIRTUAL_WIDTH;
 public class TBWGame extends Game {
     private AssetManager assetManager;
     public OrthographicCamera camera;
+    public SoundPlayer sPlayer;
     public Viewport viewport;
     public SpriteBatch batch;
     public BitmapFont font;
 
     @Override
     public void create() {
+        sPlayer = new SoundPlayer();
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new
                 InternalFileHandleResolver()));

@@ -3,6 +3,7 @@ package com.allsopg.game.bodies;
 import com.allsopg.game.TBWGame;
 import com.allsopg.game.physics.WorldManager;
 import com.allsopg.game.utility.CurrentDirection;
+import com.allsopg.game.utility.HUD;
 import com.allsopg.game.utility.IWorldObject;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -39,6 +40,7 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
     private float xSpeed;
     private float ySpeed;
     private int health;
+    private boolean invulnerable;
 
     public PlayerCharacter(String atlas, Texture t, Vector2 pos, int[] regionLengths, TBWGame game) {
         super(atlas, t, pos ,regionLengths, PLAYER_WIDTH, PLAYER_HEIGHT);
@@ -50,6 +52,7 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
         xSpeed = BASE_X_FORCE;
         ySpeed = BASE_FORCE_Y;
         health = PLAYER_MAX_LIFE;
+        invulnerable = false;
     }
     @Override
     public void buildBody() {
@@ -112,21 +115,32 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
         fixtureDef.restitution=restitution;
         return fixtureDef;
     }
-
+// siwtch invulneralbilty to use a tween
     @Override
     public void reaction() {
-        if((health - 1)> 0){
-            System.out.println(health);
-            health --;
-        }else {
-            frameTimer = 0;
-            changeAnimation();
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    gameRef.endGame();
-                }
-            },2f); // end game after 2 seconds
+        if(!invulnerable) {
+            if ((health - 1) > 0) {
+                health--;
+                HUD.assignHealth(health);
+                invulnerable = true;
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        invulnerable = false;
+                    }
+                },10);
+            } else {
+                health--;
+                frameTimer = 0;
+                changeAnimation();
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        gameRef.endGame();
+                    }
+                }, 2f); // end game after 2 seconds
+            }
         }
     }
+
 }

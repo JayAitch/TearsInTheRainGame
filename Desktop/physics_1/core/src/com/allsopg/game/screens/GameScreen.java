@@ -6,6 +6,7 @@ import com.allsopg.game.physics.WorldManager;
 import com.allsopg.game.spawners.MobSpawner;
 import com.allsopg.game.utility.CameraManager;
 import com.allsopg.game.utility.Constants;
+import com.allsopg.game.utility.GameData;
 import com.allsopg.game.utility.HUD;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -59,6 +60,7 @@ public class GameScreen extends ScreenAdapter {
         cameraManager = new CameraManager(game.camera,tiledMap);
         cameraManager.setTarget(playerCar);
         gameHUD = new HUD(game.batch, playerCar,game);
+
     }
 
     // stubbed call to spawn cars
@@ -67,8 +69,10 @@ public class GameScreen extends ScreenAdapter {
             @Override
             public void run() {
                 mobSpawner.SpawnCars(1);
+                HUD.addScore(10);
             }
-        },1,5);
+        },1,0.5f);
+
           }
 
     @Override
@@ -100,4 +104,5 @@ public class GameScreen extends ScreenAdapter {
                 Color.BLACK.b, Color.BLACK.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
+
 }

@@ -37,19 +37,23 @@ public class HUD implements Disposable {
     private Integer worldTimer;
     private float timeCount;
     private static Integer score;
+    private static Integer lives;
     private boolean timeUp;
 
     //Scene2D Widgets
-    private Label countdownLabel, timeLabel, linkLabel;
-    private static Label scoreLabel;
+    private Label countdownLabel, timeLabel, linkLabel, livesLink;
+    private static Label scoreLabel, livesLabel;
+
 
     public HUD(SpriteBatch sb, PlayerCharacter playerCharacter, TBWGame tbwGame) {
         this.playerCharacter = playerCharacter;
         this.game = tbwGame;
+
         //define tracking variables
         worldTimer = Constants.LEVEL_TIME;
         timeCount = 0;
         score = 0;
+        lives = Constants.PLAYER_MAX_LIFE;
         //new camera used to setup the HUD viewport seperate from the main Game Camera
         //define stage using that viewport and games spritebatch
         viewport = new FitViewport(Constants.VIRTUAL_WIDTH,
@@ -74,12 +78,18 @@ public class HUD implements Disposable {
                 new Label.LabelStyle(new BitmapFont(), Color.RED));
         scoreLabel = new Label(String.format("%03d", score),
                 new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+        livesLabel = new Label(String.format("%03d", lives),
+                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        livesLink = new Label("LIVES",
+                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("COUNTDOWN",
                 new Label.LabelStyle(new BitmapFont(), Color.RED));
         linkLabel = new Label("POINTS",
                 new Label.LabelStyle(new BitmapFont(), Color.BLUE));
         //labels added to table using padding and expandX
-        tableData.add(linkLabel).padBottom(5).padLeft(120);
+        tableData.add(livesLink).padBottom(5).padLeft(20);
+        tableData.add(livesLabel).expandX().padBottom(5);
+        tableData.add(linkLabel).padBottom(5).padLeft(50);
         tableData.add(scoreLabel).expandX().padBottom(5);
         tableData.add(timeLabel).padBottom(5).padRight(20);
         tableData.add(countdownLabel).expandX().padBottom(5);
@@ -159,6 +169,7 @@ public class HUD implements Disposable {
         timeCount += dt;
         if (timeCount >= 1) {
             if (worldTimer > 0) {
+
                 worldTimer--;
             } else {
                 timeUp = true;
@@ -170,10 +181,21 @@ public class HUD implements Disposable {
             timeCount = 0;
         }
     }
+
+    public void setUIScore(int value){
+        score = value;
+        scoreLabel.setText(String.format("%06d", value));
+    }
+
     // concider modifying this to display health
     public static void addScore(int value) {
         score += value;
         scoreLabel.setText(String.format("%06d", score));
+    }
+
+    public static void assignHealth(int value){
+        lives = value;
+        livesLabel.setText(String.format("%03d", lives));
     }
 
     @Override

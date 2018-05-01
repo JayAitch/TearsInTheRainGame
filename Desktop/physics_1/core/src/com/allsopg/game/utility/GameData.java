@@ -30,7 +30,7 @@ public class GameData {
     }
 
     public void setTime(float time) {
-        this.time=time;
+        this.time = time;
     }
 
     // test this value
@@ -38,8 +38,8 @@ public class GameData {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setScore(int points) {
+        score = points;
     }
 
     public void resetGameData(){
