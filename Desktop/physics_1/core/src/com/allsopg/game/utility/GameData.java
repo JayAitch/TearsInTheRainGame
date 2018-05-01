@@ -33,6 +33,7 @@ public class GameData {
         this.time=time;
     }
 
+    // test this value
     public int getScore() {
         return score;
     }
