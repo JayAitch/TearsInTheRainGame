@@ -2,6 +2,8 @@ package com.allsopg.game.utility;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -27,6 +29,7 @@ public class Constants {
 
     public static final String BACKGROUND = "tileData/assignment_two.tmx";
     public static final String PHYSICS_MATERIALS_PATH = "tileData/physicsData.json";
+
     //Constants for bodies
     public static final float DENSITY=.5f;
     public static final float FRICTION=.5f;
@@ -50,10 +53,12 @@ public class Constants {
     //player start position
     public static final Vector2 START_POSITION = new Vector2(10,10);
     //player Stats
-        //impulse strength
+    //impulse strength
     public static final float BASE_X_FORCE =30f;
     public static final float BASE_FORCE_Y =30f;
     public static final int PLAYER_MAX_LIFE = 5;
+    public static final float INVULNERABILITY_TIME = 0.5f;
+
     //car platform graphics
     public static final int[] CAR_PLATFORM_REGION_LENGTHS = {4,13};
     public static final String MOB_CAR_ATLAS_PATH = "gfx/MobCar/mob_car.atlas";
@@ -63,11 +68,23 @@ public class Constants {
     public static float CAR_PLATFORM_OFFSET_X = 3f;
     public static final Vector2 PLATFORM_POSITION = new Vector2(0,8);
 
+    //miscilanious sprites
+    public static final String FIRE_CHIMNEY_PATH =  "gfx/Flame/FChimney.atlas";
+    public static final Vector2 FIRE_CHIMNEY_ONE_POS = new Vector2(2,3);
+    public static final Vector2 FIRE_CHIMNEY_TWO_POS = new Vector2(50,3);
 
     //spawn constants
     //randoms for speed Random: speed = random(range)+ mod
     public static final int CAR_SPEED_RANGE = 6;
     public static final int CAR_SPEED_MOD = 3;
+    // spawn tick interval
+    public static final float CAR_SPAWN_RATE = 2f;
     // tick used to scan for out of bound objects
     public static final float SPAWNER_SCAN_TICK = 0.25f;
+
+
+    // sound and music
+    public static final String BACKGROUND_TRACK_PATH = "sfx/TearsTheme.ogg";
+    public static final String EXPLOSION_SOUND_PATH = "sfx/TearsTheme.ogg";
+    public static final String CRASH_SOUND_PATH = "sfx/TearsTheme.ogg";
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -40,12 +41,12 @@ public abstract class AnimatedSprite extends Sprite {
         super(t,width, height);
         this.setX(pos.x);
         this.setY(pos.y);
-        playmode = Animation.PlayMode.NORMAL;
+        playmode = Animation.PlayMode.LOOP;
         initAtlas(atlasString);
     }
 
     /**
-     * Generates an animation in Normal playmode with sizing done through, t, height and width
+     * Generates an animation in with sizing done through, t, height and width
      * does not generate an animation by default this needs to be done in extended class
      * @param t initial sizing texture
      * @param pos Start Postion of object
@@ -63,6 +64,7 @@ public abstract class AnimatedSprite extends Sprite {
         this.setRegion((TextureRegion) animation.getKeyFrame(animationTime));
     }
 
+
     /**
      * Generates an animation that consist of the entire atlas
      * @param atlasString
@@ -73,7 +75,7 @@ public abstract class AnimatedSprite extends Sprite {
         Array<TextureAtlas.AtlasRegion> regions = new
                 Array<TextureAtlas.AtlasRegion>(atlas.getRegions());
         regions.sort(new RegionComparator());
-        animation = new Animation(FRAME_DURATION,regions, Animation.PlayMode.NORMAL);
+        animation = new Animation(FRAME_DURATION,regions, Animation.PlayMode.LOOP);
     }
 
     /**
@@ -86,6 +88,7 @@ public abstract class AnimatedSprite extends Sprite {
         regions.sort(new RegionComparator());
         animation = new Animation(Constants.FRAME_DURATION, regions, loopType);
     }
+
 
     protected static class RegionComparator implements Comparator<TextureAtlas.AtlasRegion> {
         @Override

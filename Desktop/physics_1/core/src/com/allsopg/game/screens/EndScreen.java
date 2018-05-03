@@ -1,5 +1,7 @@
 package com.allsopg.game.screens;
 
+import com.allsopg.game.Sound.SoundPlayer;
+import com.allsopg.game.SpriteClasses.FlameChimney;
 import com.allsopg.game.utility.Constants;
 import com.allsopg.game.utility.GameData;
 import com.allsopg.game.utility.HUD;
@@ -8,10 +10,16 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
+import static com.allsopg.game.utility.Constants.CAR_SIZE;
+import static com.allsopg.game.utility.Constants.FIRE_CHIMNEY_PATH;
+import static com.allsopg.game.utility.Constants.START_POSITION;
 
 /**
  * Created by gerard on 23/04/2017.
@@ -24,6 +32,7 @@ public class EndScreen extends ScreenAdapter {
     private Label countdownLabel, headerLabel, linkLabel;
     private static Label scoreLabel;
 
+    // construct stage and populate with points data
     public EndScreen(){
         stage = new Stage(new FitViewport(Constants.VIRTUAL_WIDTH/3, Constants.VIRTUAL_HEIGHT/3));
         Gdx.input.setInputProcessor(stage);
@@ -31,10 +40,10 @@ public class EndScreen extends ScreenAdapter {
         tableData.setFillParent(true);
         createScoreAndTimer();
         stage.addActor(tableData);
+        SoundPlayer.stopBackgroundTrack();
     }
 
     public void show() {
-
     }
 
     public void resize(int width, int height) {
@@ -42,9 +51,11 @@ public class EndScreen extends ScreenAdapter {
     }
 
     public void render(float delta) {
+
         clearScreen();
         stage.draw();
     }
+
 
     private void createScoreAndTimer(){
         //define labels using the String, and a Label style consisting of a font and color

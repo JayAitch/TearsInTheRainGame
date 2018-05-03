@@ -32,30 +32,22 @@ public class ContactListenerClass implements com.badlogic.gdx.physics.box2d.Cont
     }
 
     // resolve collision between fixtures and calls there reactions
+    // try and catch for casting objects taken out to try and prevent lag, this method will break if other dynamic or kinematic bodies are added.
     private void resolveCollision(Fixture fixtureA, Fixture fixtureB){
         if(fixtureA.getBody().getType() == BodyDef.BodyType.DynamicBody && fixtureB.getBody().getType() == BodyDef.BodyType.KinematicBody) { // if fa is dynamic and fix b is kinamatic
-            try {
-                ((CarPlatform) fixtureB.getBody().getUserData()).reaction(); // try cast b -> mob car
-            } catch (Exception e) {
-                System.out.println("not a car");
-            }
-            try {
-                ((PlayerCharacter) fixtureA.getBody().getUserData()).reaction(); // try cast a -> player character
-            } catch (Exception e) {
-                System.out.println("not a car");
-            }
+
+                ((CarPlatform) fixtureB.getBody().getUserData()).reaction(); //  cast b -> mob car
+
+                ((PlayerCharacter) fixtureA.getBody().getUserData()).reaction(); //  cast a -> player character
+
         }
         if(fixtureB.getBody().getType() == BodyDef.BodyType.DynamicBody && fixtureA.getBody().getType() == BodyDef.BodyType.KinematicBody) {
-            try {
+
                 ((CarPlatform) fixtureA.getBody().getUserData()).reaction(); // try cast a -> mob car
-            } catch (Exception e) {
-                System.out.println("not a car");
-            }
-            try {
+
+
                 ((PlayerCharacter) fixtureB.getBody().getUserData()).reaction(); // try cast b -> player character
-            } catch (Exception e) {
-                System.out.println("not a car");
-            }
+
         }
     }
 }

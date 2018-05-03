@@ -1,5 +1,6 @@
 package com.allsopg.game.spawners;
 
+import com.allsopg.game.SpriteClasses.FlameChimney;
 import com.allsopg.game.bodies.CarPlatform;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -11,6 +12,7 @@ import java.util.Random;
 import static com.allsopg.game.utility.Constants.CAR_SIZE;
 import static com.allsopg.game.utility.Constants.CAR_SPEED_MOD;
 import static com.allsopg.game.utility.Constants.CAR_SPEED_RANGE;
+import static com.allsopg.game.utility.Constants.FIRE_CHIMNEY_PATH;
 import static com.allsopg.game.utility.Constants.MOB_CAR_ATLAS_PATH;
 import static com.allsopg.game.utility.Constants.CAR_PLATFORM_REGION_LENGTHS;
 import static com.allsopg.game.utility.Constants.SPAWNER_SCAN_TICK;
@@ -40,7 +42,9 @@ public class MobSpawner {
         for(int i =0; i < amount; i++) {
             position = new Vector2(0,(random.nextInt(10)+5));
             CarPlatform tempCar = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, position, CAR_PLATFORM_REGION_LENGTHS);
+
             tempCar.moveSpawnable(random.nextInt(CAR_SPEED_RANGE)+CAR_SPEED_MOD);
+
             spawnedPlatforms.add(tempCar);
         }
     }
