@@ -14,7 +14,7 @@ public class SoundPlayer {
     private static Music backgroundMusic;
     private static IntMap<Sound> soundKeys;
 
-    public static enum SoundEnum{
+    public enum SoundEnum{
         EXPLODESND, CRASHSND
     }
     //generate intmap and sounds from internal files
@@ -22,12 +22,17 @@ public class SoundPlayer {
         soundKeys = new IntMap<Sound>();
         Sound explodeSnd = Gdx.audio.newSound(Gdx.files.internal(Constants.EXPLOSION_SOUND_PATH));
         Sound crashSnd = Gdx.audio.newSound(Gdx.files.internal(Constants.CRASH_SOUND_PATH));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal(Constants.BACKGROUND_TRACK_PATH));
         soundKeys.put(1,crashSnd);
         soundKeys.put(2,explodeSnd);
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal(Constants.BACKGROUND_TRACK_PATH));
+    }
+
+    public static void playBackgroundTrack(){
         backgroundMusic.play();
     }
 
+    public void waitForBGLoad(){
+    }
     public static void stopBackgroundTrack(){
         backgroundMusic.stop();
     }

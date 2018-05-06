@@ -1,5 +1,6 @@
 package com.allsopg.game.screens;
 
+import com.allsopg.game.Sound.SoundPlayer;
 import com.allsopg.game.TBWGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -38,6 +39,7 @@ public class MainMenuScreen extends ScreenAdapter {
 
         if (Gdx.input.isTouched()) {
             game.setScreen(new GameScreen(game));
+            SoundPlayer.playBackgroundTrack();
             dispose();
         }
     }
