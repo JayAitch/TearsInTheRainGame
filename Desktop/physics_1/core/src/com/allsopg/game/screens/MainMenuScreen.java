@@ -5,9 +5,13 @@ import com.allsopg.game.TBWGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import static com.allsopg.game.utility.Constants.BACKGROUND;
+import static com.allsopg.game.utility.Constants.INTRO_SCREEN_PATH;
+import static com.allsopg.game.utility.Constants.VIRTUAL_HEIGHT;
+import static com.allsopg.game.utility.Constants.VIRTUAL_WIDTH;
 
 
 /**
@@ -15,14 +19,16 @@ import static com.allsopg.game.utility.Constants.BACKGROUND;
  */
 
 public class MainMenuScreen extends ScreenAdapter {
-        private TBWGame game;
+    private TBWGame game;
+    private Texture introScreenT;
 
-        public MainMenuScreen(TBWGame aGame) {
+    public MainMenuScreen(TBWGame aGame) {
             this.game = aGame;
         }
 
     @Override
     public void show() {
+        introScreenT = new Texture(Gdx.files.internal(INTRO_SCREEN_PATH));
         game.getAssetManager().load(BACKGROUND, TiledMap.class);
         game.getAssetManager().finishLoading();
     }
@@ -33,8 +39,7 @@ public class MainMenuScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.camera.update();
         game.batch.begin();
-        game.font.draw(game.batch, "Assignment 2 Example", 100, 150);
-        game.font.draw(game.batch, "Touch screen to start", 100, 100);
+        game.batch.draw(introScreenT, 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {
