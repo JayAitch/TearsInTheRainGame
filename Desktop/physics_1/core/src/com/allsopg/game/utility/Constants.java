@@ -87,6 +87,6 @@ public class Constants {
 
     // sound and music
     public static final String BACKGROUND_TRACK_PATH = "sfx/TearsTheme.ogg";
-    public static final String EXPLOSION_SOUND_PATH = "sfx/TearsTheme.ogg";
-    public static final String CRASH_SOUND_PATH = "sfx/TearsTheme.ogg";
+    public static final String EXPLOSION_SOUND_PATH = "sfx/ExplosionSound.ogg";
+    public static final String CRASH_SOUND_PATH = "sfx/CrashSound.ogg";
 }

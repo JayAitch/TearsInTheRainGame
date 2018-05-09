@@ -1,5 +1,6 @@
 package com.allsopg.game.bodies;
 
+import com.allsopg.game.Sound.SoundPlayer;
 import com.allsopg.game.TBWGame;
 import com.allsopg.game.physics.WorldManager;
 import com.allsopg.game.spawners.IMovingSpawnable;
@@ -114,13 +115,12 @@ public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprit
         if(!isDeathSequence) { // if isnt in death sequence
             frameTimer = 0;
             isDeathSequence = true;
-            // play crash sound
+            SoundPlayer.playSound(SoundPlayer.SoundEnum.CRASHSND);// play crash sound
             changeAnimation();
             Tween.to(tweenData, TweenDataAccessor.TYPE_COLOUR, 1f) // tween callback to dispose
                     .setCallback(new TweenCallback() {
                         @Override
                         public void onEvent(int type, BaseTween<?> source) {
-                            // play explosion sound
                             dispose();
                             setPosition(300, 300);
                         }

@@ -1,5 +1,6 @@
 package com.allsopg.game.bodies;
 
+import com.allsopg.game.Sound.SoundPlayer;
 import com.allsopg.game.TBWGame;
 import com.allsopg.game.physics.WorldManager;
 import com.allsopg.game.utility.CurrentDirection;
@@ -167,6 +168,7 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
                 frameTimer = 0;
                 isDead = true;
                 changeAnimation();
+                SoundPlayer.playSound(SoundPlayer.SoundEnum.EXPLODESND);
                 Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
