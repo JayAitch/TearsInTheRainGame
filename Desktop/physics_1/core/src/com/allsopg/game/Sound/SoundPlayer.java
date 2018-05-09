@@ -28,7 +28,8 @@ public class SoundPlayer {
     }
 
     public static void playBackgroundTrack(){
-        //backgroundMusic.play();
+        backgroundMusic.play();
+        backgroundMusic.setVolume(0.5f);
     }
 
     public void waitForBGLoad(){
