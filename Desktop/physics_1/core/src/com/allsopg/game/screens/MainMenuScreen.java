@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import static com.allsopg.game.utility.Constants.BACKGROUND;
+import static com.allsopg.game.utility.Constants.BACKGROUND_TRACK_PATH;
 import static com.allsopg.game.utility.Constants.INTRO_SCREEN_PATH;
 import static com.allsopg.game.utility.Constants.VIRTUAL_HEIGHT;
 import static com.allsopg.game.utility.Constants.VIRTUAL_WIDTH;
@@ -31,6 +32,7 @@ public class MainMenuScreen extends ScreenAdapter {
         introScreenT = new Texture(Gdx.files.internal(INTRO_SCREEN_PATH));
         game.getAssetManager().load(BACKGROUND, TiledMap.class);
         game.getAssetManager().finishLoading();
+     //   game.getAssetManager().isLoaded(BACKGROUND_TRACK_PATH);
     }
 
     @Override
