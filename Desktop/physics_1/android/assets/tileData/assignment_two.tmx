@@ -1,28 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="80" height="30" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#9684e6" nextobjectid="21">
- <tileset firstgid="1" name="bricks" tilewidth="32" tileheight="32" tilecount="630" columns="21">
-  <image source="Tiles/bricks_02.jpg" width="700" height="970"/>
- </tileset>
- <tileset firstgid="631" name="metal" tilewidth="32" tileheight="32" tilecount="1032" columns="43">
-  <image source="Tiles/metal_06.jpg" width="1400" height="798"/>
- </tileset>
- <tileset firstgid="1663" source="Stars.tsx"/>
- <layer name="background" width="80" height="30">
+<map version="1.0" tiledversion="1.1.3" orientation="orthogonal" renderorder="right-down" width="80" height="30" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#9684e6" nextobjectid="24">
+ <tileset firstgid="1" source="Stars.tsx"/>
+ <tileset firstgid="351" source="MetalTexture.tsx"/>
+ <layer name="background" width="80" height="30" visible="0">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="platforms" width="80" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt2jlPVFEYxvEbLlABKrL1xNjYqyCI2LMpqKwqghsICMo67Pu+7zuE0PhRDDE01vIliKHw/2Z6izeQuSe8T/Lrzzw5M+c9c++9aM9iiUiKfM97YftPnRD99Vt/6sj++2H9qSP777f1p84x/bVGRXoV7uaU/vatP3Wku5/WnzrS3bn1p450l+5HehXuRrrLs/7Uke7arT91ZHY5tP7UkfP3xPpTR87fv9eov3I+awUqUYXXeIO3qMY71KAW7/EBH//Tj5y/dxy9v8XFeF48EnADN3ELibiNJCQjBalIi7n8Ncj5W+Bof/fp4wEeIgOZeIQsZOMxcvAEuXh6Bf3J+dvpaH9BiMwuR47194d9dHYFe0kTmV1+OdZffCy/ebGRXkU4MrtcONZfkCKzy92AfBdcjMwuRdafOjK7hKw/dWR2Obb+1JHZ5dT6U0dmF/kPpg3t6EAnuhBCN3rQiz70YwCDGMIwRjCKMYxjApOYwjRmMIs5zGMBi1jCMlawijWsYwOb2MI2drCLvahgrlXuIPlyj0OhH34m/AzPUYwSeUcBL/EKpSjz9XfxT/iMOtTjCxrQiCZ8RTNa8A3f5Rkh2vxgrlXuIB1yj0OXH34m3I0e9KJP3lHAAAYxhGGMYBRjGMcEJjGFacxgFnOYxwIWsYRlrGAVa1jHBjaxhW3sYBd72MdBQNf6D/Clohc=
+   eJzt1UEKgCAQBdDxpNb9L1HrIWKMolm8B4KLL+rCbwQAAACsmSNiO8c+/j4J9OBNALxHpwL0pqcBvpM7dqa+vergSqay9m7+ZM+cWc1W7+FfoosDXqMV+w==
   </data>
  </layer>
  <objectgroup name="physics" offsetx="-1" offsety="-1">
-  <object id="5" name="platform_4" type="Rectangle" x="1407.33" y="607.176" width="63.3529" height="61">
-   <properties>
-    <property name="material" value="ice"/>
-   </properties>
-  </object>
   <object id="9" name="platform_0" type="RectangleMapObject" x="1" y="863.843" width="2557.33" height="32">
    <properties>
     <property name="material" value="ice"/>
@@ -38,16 +28,26 @@
     <property name="material" value="ice"/>
    </properties>
   </object>
-  <object id="12" name="platform_3" type="RectangleMapObject" x="1475.02" y="507.324" width="412.314" height="63">
-   <properties>
-    <property name="material" value="ice"/>
-   </properties>
-  </object>
-  <object id="13" x="1889.63" y="482.569" width="447.059" height="29.8039">
+  <object id="13" x="2304.63" y="418.569" width="97.059" height="29.8039">
    <properties>
     <property name="material" value="ice"/>
    </properties>
   </object>
   <object id="18" name="TopWall" x="5" y="3" width="2552" height="28"/>
+  <object id="21" x="1761.47" y="705.098" width="97.059" height="29.8039">
+   <properties>
+    <property name="material" value="ice"/>
+   </properties>
+  </object>
+  <object id="22" x="1118.47" y="353.098" width="97.059" height="29.8039">
+   <properties>
+    <property name="material" value="ice"/>
+   </properties>
+  </object>
+  <object id="23" x="416.47" y="578.098" width="97.059" height="29.8039">
+   <properties>
+    <property name="material" value="ice"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

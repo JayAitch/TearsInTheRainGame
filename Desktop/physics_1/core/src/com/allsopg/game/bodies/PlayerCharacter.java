@@ -50,6 +50,7 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
     private float ySpeed;
     private int health;
     private boolean invulnerable;
+    private boolean isDead;
 
     protected TweenData tweenData;
     protected TweenManager tweenManager;
@@ -68,6 +69,7 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
         ySpeed = BASE_FORCE_Y;
         health = PLAYER_MAX_LIFE;
         invulnerable = false;
+        isDead = false;
     }
     //initiasing tween data for use with tween manager
     protected void initTweenData() {
@@ -99,32 +101,34 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
     public void move(CurrentDirection direction){
         Vector2 vel = playerBody.getLinearVelocity();
         Vector2 pos = playerBody.getPosition();
-        switch(direction){
-            case LEFT:
-                facingRight=false;
-                playmode = Animation.PlayMode.LOOP;
-                if (vel.x > -MAX_VELOCITY) {
-                playerBody.applyLinearImpulse(-xSpeed, 0, pos.x, pos.y, true);
-                }
-                break;
-            case RIGHT:
-                facingRight=true;
-                playmode = Animation.PlayMode.LOOP;
-                if (vel.x < MAX_VELOCITY) {
-                    playerBody.applyLinearImpulse(xSpeed, 0, pos.x, pos.y, true);
-                }
-                break;
-            case UP:
-                playmode = Animation.PlayMode.NORMAL;
-                if (pos.y< MAX_HEIGHT && vel.y < MAX_VELOCITY) {
-                    playerBody.applyLinearImpulse(0, ySpeed, pos.x, pos.y, true);
-                }
-                break;
-            case STOP:
-                if(vel.x > -8 & vel.x < 8)
+        if(!isDead) {
+            switch (direction) {
+                case LEFT:
+                    facingRight = false;
+                    playmode = Animation.PlayMode.LOOP;
+                    if (vel.x > -MAX_VELOCITY) {
+                        playerBody.applyLinearImpulse(-xSpeed, 0, pos.x, pos.y, true);
+                    }
+                    break;
+                case RIGHT:
+                    facingRight = true;
+                    playmode = Animation.PlayMode.LOOP;
+                    if (vel.x < MAX_VELOCITY) {
+                        playerBody.applyLinearImpulse(xSpeed, 0, pos.x, pos.y, true);
+                    }
+                    break;
+                case UP:
                     playmode = Animation.PlayMode.NORMAL;
+                    if (pos.y < MAX_HEIGHT && vel.y < MAX_VELOCITY) {
+                        playerBody.applyLinearImpulse(0, ySpeed, pos.x, pos.y, true);
+                    }
+                    break;
+                case STOP:
+                    if (vel.x > -8 & vel.x < 8)
+                        playmode = Animation.PlayMode.NORMAL;
+            }
+            animation.setPlayMode(playmode);
         }
-        animation.setPlayMode(playmode);
     }
 
     // generate fixture definitions for use with physics body
@@ -158,9 +162,10 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
                         })
                         .target(.15f,.15f,.15f,0f)
                         .start(tweenManager);
-            } else { // if resulting lives means player is dead
+            } else if(!isDead) { // if resulting lives means player is dead
                 health--;
                 frameTimer = 0;
+                isDead = true;
                 changeAnimation();
                 Timer.schedule(new Timer.Task() {
                     @Override
