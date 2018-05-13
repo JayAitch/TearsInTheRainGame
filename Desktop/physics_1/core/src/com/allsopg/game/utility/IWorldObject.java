@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
  */
 
 public interface IWorldObject {
-    public void buildBody();
-    public FixtureDef getFixtureDef(float density, float friction, float restitution);
-    public void reaction();
+     void buildBody();
+     FixtureDef getFixtureDef(float density, float friction, float restitution);
+     void reaction();
 }

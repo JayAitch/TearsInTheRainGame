@@ -10,9 +10,9 @@ public class GameData {
     private String playerName;
     private static GameData INSTANCE;
 
-    private GameData(){}
+    private GameData(){} // private constructor preventing dublicates
 
-    public static GameData getInstance(){
+    public static GameData getInstance(){ // singleton pattern instatiating object
         if(INSTANCE==null){return new GameData();}
         return INSTANCE;
     }

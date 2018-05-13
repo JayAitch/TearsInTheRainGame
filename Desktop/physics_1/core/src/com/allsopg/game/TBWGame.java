@@ -31,13 +31,13 @@ public class TBWGame extends Game {
 
     @Override
     public void create() {
-        sPlayer = new SoundPlayer();
-        assetManager = new AssetManager();
+        sPlayer = new SoundPlayer(); // instatiate sound player, static methods to be called
+        assetManager = new AssetManager(); // asset manager to wait for tilemap to be loaded
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new
                 InternalFileHandleResolver()));
         camera = new OrthographicCamera();
         viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, camera);
-        batch = new SpriteBatch();
+        batch = new SpriteBatch(); // instatiate sprite batch, this will be passed around
         //Using LibGDX's default Arial font.
         font = new BitmapFont();
         setScreen(new MainMenuScreen(this));

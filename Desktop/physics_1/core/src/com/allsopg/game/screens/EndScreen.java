@@ -40,7 +40,7 @@ public class EndScreen extends ScreenAdapter {
         tableData.setFillParent(true);
         createScoreAndTimer();
         stage.addActor(tableData);
-        SoundPlayer.stopBackgroundTrack();
+        SoundPlayer.stopBackgroundTrack(); // call to static soundplayer methpod to stop background track
     }
 
     public void show() {
@@ -56,7 +56,7 @@ public class EndScreen extends ScreenAdapter {
         stage.draw();
     }
 
-
+// instatiate and populate score with HUD data
     private void createScoreAndTimer(){
         //define labels using the String, and a Label style consisting of a font and color
         headerLabel = new Label("LEVEL ONE SCORE", new Label.LabelStyle(new BitmapFont(), Color.LIME));
@@ -69,7 +69,7 @@ public class EndScreen extends ScreenAdapter {
         tableData.add(scoreLabel).expandX().padRight(160);
 
     }
-
+// cler to black
     private void clearScreen() {
         Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g,
                 Color.BLACK.b, Color.BLACK.a);

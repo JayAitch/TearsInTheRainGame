@@ -29,12 +29,11 @@ public class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        introScreenT = new Texture(Gdx.files.internal(INTRO_SCREEN_PATH));
+        introScreenT = new Texture(Gdx.files.internal(INTRO_SCREEN_PATH)); // instatiate and show intro screen
         game.getAssetManager().load(BACKGROUND, TiledMap.class);
         game.getAssetManager().finishLoading();
-     //   game.getAssetManager().isLoaded(BACKGROUND_TRACK_PATH);
     }
-
+    // render main menu screen objects
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
@@ -44,9 +43,9 @@ public class MainMenuScreen extends ScreenAdapter {
         game.batch.draw(introScreenT, 0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         game.batch.end();
 
-        if (Gdx.input.isTouched()) {
-            game.setScreen(new GameScreen(game));
-            SoundPlayer.playBackgroundTrack();
+        if (Gdx.input.isTouched()) { // screeen tapped
+            game.setScreen(new GameScreen(game)); //show game screen
+            SoundPlayer.playBackgroundTrack(); // play background track
             dispose();
         }
     }

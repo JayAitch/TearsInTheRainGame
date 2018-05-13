@@ -43,7 +43,7 @@ import static com.allsopg.game.utility.Constants.RESTITUTION;
  */
 
 public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionSprite implements IWorldObject {
-    private TBWGame gameRef;
+    private TBWGame gameRef; // game reference
     private Body playerBody;
     private boolean facingRight = true;
 
@@ -61,8 +61,8 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
         super(atlas, t, pos ,regionLengths, PLAYER_WIDTH, PLAYER_HEIGHT);
         gameRef = game;
         initiatePlayerStats();
-        buildBody();
-        initTweenData();
+        buildBody(); // build phys body
+        initTweenData(); //populate tween data
     }
     // base stats set on initiation via constants to allow these values to change throughout the game.
     private void initiatePlayerStats(){
@@ -86,39 +86,39 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(getX(),getY());
-        playerBody = WorldManager.getInstance().getWorld().createBody(bodyDef);
-        playerBody.setUserData(this);
+        playerBody = WorldManager.getInstance().getWorld().createBody(bodyDef); // call to world manager to creat body
+        playerBody.setUserData(this); // set this obj as owner
         playerBody.setFixedRotation(true);
-        playerBody.createFixture(getFixtureDef(DENSITY,FRICTION,RESTITUTION));
+        playerBody.createFixture(getFixtureDef(DENSITY,FRICTION,RESTITUTION)); // create fixture with properties defined in constants
     }
     // update method for animation and position
     @Override
     public void update(float stateTime) {
         super.update(stateTime);
-        this.setPosition(playerBody.getPosition().x-PLAYER_OFFSET_X,playerBody.getPosition().y-PLAYER_OFFSET_Y);
-        if(!facingRight){flip(true,false);}
+        this.setPosition(playerBody.getPosition().x-PLAYER_OFFSET_X,playerBody.getPosition().y-PLAYER_OFFSET_Y); //set position to the same as body
+        if(!facingRight){flip(true,false);} // flip sprite with movement
     }
     // State machine to drive movement through buttons, altering velocity
     public void move(CurrentDirection direction){
         Vector2 vel = playerBody.getLinearVelocity();
         Vector2 pos = playerBody.getPosition();
-        if(!isDead) {
+        if(!isDead) { // if player is not dead
             switch (direction) {
-                case LEFT:
+                case LEFT: //left button
                     facingRight = false;
                     playmode = Animation.PlayMode.LOOP;
                     if (vel.x > -MAX_VELOCITY) {
                         playerBody.applyLinearImpulse(-xSpeed, 0, pos.x, pos.y, true);
                     }
                     break;
-                case RIGHT:
+                case RIGHT: //right button
                     facingRight = true;
                     playmode = Animation.PlayMode.LOOP;
                     if (vel.x < MAX_VELOCITY) {
                         playerBody.applyLinearImpulse(xSpeed, 0, pos.x, pos.y, true);
                     }
                     break;
-                case UP:
+                case UP: //up button
                     playmode = Animation.PlayMode.NORMAL;
                     if (pos.y < MAX_HEIGHT && vel.y < MAX_VELOCITY) {
                         playerBody.applyLinearImpulse(0, ySpeed, pos.x, pos.y, true);
@@ -161,23 +161,26 @@ public class PlayerCharacter extends com.allsopg.game.SpriteClasses.MultiRegionS
                                 invulnerable = false;
                             }
                         })
-                        .target(.15f,.15f,.15f,0f)
+                        .target(0f,0f,0f,1f)
                         .start(tweenManager);
             } else if(!isDead) { // if resulting lives means player is dead
-                health--;
-                frameTimer = 0;
-                isDead = true;
-                changeAnimation();
-                SoundPlayer.playSound(SoundPlayer.SoundEnum.EXPLODESND);
-                Timer.schedule(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        // explosion sound
-                        gameRef.endGame();
-                    }
-                }, 2f); // end game after 2 seconds
+                killPlayer();
             }
         }
+    }
+    public void killPlayer(){
+        health--;
+        frameTimer = 0; // set framtimer to 0
+        isDead = true;
+        changeAnimation(); // switch to death animation
+        SoundPlayer.playSound(SoundPlayer.SoundEnum.EXPLODESND);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                // explosion sound
+                gameRef.endGame();
+            }
+        }, 2f); // end game after 2 seconds
     }
 
 }

@@ -23,14 +23,14 @@ public class Constants {
     public static final float FRAME_DURATION = 1.0f / 10.0f;
     public static final float TIME_STEP=1/60f;
     public static final int LEVEL_TIME = 60;
-
+    //Physics manager iterations
     public static final int VELOCITY_ITERATIONS = 6;
     public static final int POSITION_ITERATIONS = 2;
     // static textures
     public static final String INTRO_SCREEN_PATH = "gfx/TITRIntro.png";
 
     public static final String BACKGROUND = "tileData/assignment_two.tmx";
-    public static final String PHYSICS_MATERIALS_PATH = "tileData/physicsData.json";
+    public static final String PHYSICS_MATERIALS_PATH = "tileData/physicsData.json"; // physics tile data
 
     //Constants for bodies
     public static final float DENSITY=.5f;
