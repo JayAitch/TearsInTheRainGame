@@ -29,7 +29,7 @@ public class WorldManager {
     private static boolean initialised = false;
   private static WorldManager WORLDMANAGER;
 
-    public static WorldManager getInstance(){
+    public static WorldManager getInstance(){ // get instatance to opperate as a singlton
         if(WORLDMANAGER != null)return WORLDMANAGER;
         else if(WORLDMANAGER == null && initialised){
             WORLDMANAGER = new WorldManager();
@@ -38,7 +38,7 @@ public class WorldManager {
         return null;
     }
 
-    private WorldManager(){
+    private WorldManager(){ // private constructor to prevent multiple instances being created
         gravity = new Vector2(0,-9.8f);
         Box2D.init();
         world = new World(gravity, true);

@@ -1,5 +1,6 @@
 package com.allsopg.game.bodies;
 
+import com.allsopg.game.Sound.SoundPlayer;
 import com.allsopg.game.TBWGame;
 import com.allsopg.game.physics.WorldManager;
 import com.allsopg.game.spawners.IMovingSpawnable;
@@ -24,6 +25,7 @@ import com.badlogic.gdx.utils.Timer;
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenAccessor;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
@@ -113,19 +115,18 @@ public class CarPlatform extends com.allsopg.game.SpriteClasses.MultiRegionSprit
     public void reaction() {
         if(!isDeathSequence) { // if isnt in death sequence
             frameTimer = 0;
-            isDeathSequence = true;
-            // play crash sound
-            changeAnimation();
+            isDeathSequence = true; // boolean to prevent reseting frame timer during death
+            SoundPlayer.playSound(SoundPlayer.SoundEnum.CRASHSND);// play crash sound
+            changeAnimation(); // switch animation to death sequence animation
             Tween.to(tweenData, TweenDataAccessor.TYPE_COLOUR, 1f) // tween callback to dispose
                     .setCallback(new TweenCallback() {
                         @Override
                         public void onEvent(int type, BaseTween<?> source) {
-                            // play explosion sound
-                            dispose();
-                            setPosition(300, 300);
+                            dispose(); // remove fixture
+                            setPosition(300, 300); //set offscreen
                         }
                     })
-                    .target(.15f, .15f, .15f, 0f)
+                    .target(.15f, .15f, .15f, 1f)
                     .start(tweenManager);
         }
     }

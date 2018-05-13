@@ -26,7 +26,7 @@ public abstract class MultiRegionSprite extends AnimatedSprite{
     }
     @Override
     public void update(float stateTime) {
-        frameTimer += Gdx.graphics.getDeltaTime();
+        frameTimer += Gdx.graphics.getDeltaTime(); // useing frame timer to allow this value to be reset
         super.update(frameTimer);
     }
 
@@ -37,15 +37,15 @@ public abstract class MultiRegionSprite extends AnimatedSprite{
         regions.sort(new RegionComparator());
         animationRegions = new HashMap<Integer, Array<TextureAtlas.AtlasRegion>>();
 
-        for(int i = 0; i < regionLengths.length; i++) {
+        for(int i = 0; i < regionLengths.length; i++) { // for the lenth of array passede in
             Array<TextureAtlas.AtlasRegion> tempRegion = new Array<TextureAtlas.AtlasRegion>();
-            for(int i2 = 0; i2 < regionLengths[i]; i2++) {
-                tempRegion.add(regions.pop());
+            for(int i2 = 0; i2 < regionLengths[i]; i2++) { // for value in each array element
+                tempRegion.add(regions.pop()); // pop frames off and add to temperary region array
 
             }
-            animationRegions.put(i,tempRegion);
+            animationRegions.put(i,tempRegion); // add contents of temp array to hashmap
         }
-        animationInit(animationRegions.get(0), Animation.PlayMode.LOOP);
+        animationInit(animationRegions.get(0), Animation.PlayMode.LOOP); // assign animation in the first element
     }
 
 

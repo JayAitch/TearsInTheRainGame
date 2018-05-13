@@ -27,17 +27,17 @@ public class CameraManager {
         this.camera = camera;
         this.tiledMap = tiledMap;
         TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer)
-                this.tiledMap.getLayers().get(0);
-        levelWidth = tiledMapTileLayer.getWidth();
+                this.tiledMap.getLayers().get(0); // populate tile map variable with bottom layer
+        levelWidth = tiledMapTileLayer.getWidth(); // get level size variables
         levelHeight = tiledMapTileLayer.getHeight();
-        position = new Vector2();
+        position = new Vector2();// camera positionn
 
     }
     //update camera based on player position
     public void update () {
         if (!hasTarget()) return;
-        if (cameraTrackX()||cameraTrackY()) {
-            position.x = target.getX() + target.getOriginX();
+        if (cameraTrackX()||cameraTrackY()) { // if cameratracks return false
+            position.x = target.getX() + target.getOriginX(); // adjust potsitions
             position.y = target.getY() + target.getOriginY();
             camera.position.set(position.x, position.y, 0);
             camera.update();
@@ -47,7 +47,7 @@ public class CameraManager {
     public void setTarget (Sprite target) { this.target = target; }
     public boolean hasTarget () { return target != null; }
 
-    private boolean cameraTrackX() {
+    private boolean cameraTrackX() { // if camera X position is sufficiently different from player X
         if ((target.getX() > (VIRTUAL_WIDTH * UNITSCALE) / 2f) &&
                 (target.getX() < (levelWidth - (VIRTUAL_WIDTH * UNITSCALE )/2))) {
             return true;
@@ -55,7 +55,7 @@ public class CameraManager {
         return false;
     }
 
-    private boolean cameraTrackY() {
+    private boolean cameraTrackY() { // if camera Y position is sufficiently different from player Y
         if ((target.getY() > (VIRTUAL_HEIGHT * UNITSCALE) / 2f) &&
                 (target.getY() < (levelHeight - (VIRTUAL_HEIGHT * UNITSCALE )/2))) {
             return true;

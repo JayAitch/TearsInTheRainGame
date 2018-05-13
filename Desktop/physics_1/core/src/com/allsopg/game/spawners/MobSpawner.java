@@ -41,11 +41,10 @@ public class MobSpawner {
     public void SpawnCars(int amount) {
         for(int i =0; i < amount; i++) {
             position = new Vector2(0,(random.nextInt(10)+5));
-            CarPlatform tempCar = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, position, CAR_PLATFORM_REGION_LENGTHS);
+            CarPlatform tempCar = new CarPlatform(MOB_CAR_ATLAS_PATH, CAR_SIZE, position, CAR_PLATFORM_REGION_LENGTHS); // instatiate new car
+            tempCar.moveSpawnable(random.nextInt(CAR_SPEED_RANGE)+CAR_SPEED_MOD); // call move spawnable
 
-            tempCar.moveSpawnable(random.nextInt(CAR_SPEED_RANGE)+CAR_SPEED_MOD);
-
-            spawnedPlatforms.add(tempCar);
+            spawnedPlatforms.add(tempCar); // add instatiated car to list of cars
         }
     }
 
@@ -61,7 +60,7 @@ public class MobSpawner {
 
     // check whether all mobs in the list are out of bounds
     public void checkPositions(){
-        for(int i = 0; i < spawnedPlatforms.size; i++){
+                for(int i = 0; i < spawnedPlatforms.size; i++){ // for each element in spawn array
             IMovingSpawnable tempMob = spawnedPlatforms.get(i);
             if(tempMob.getPosition().x > 100){   //if out of bounds
                 System.out.println(tempMob.getPosition().x);
@@ -71,6 +70,7 @@ public class MobSpawner {
             }
         }
     }
+    // this class is in charge of updating and drawing all mob cars
     //update whole list
     public void update(float deltaTime) {
         if (spawnedPlatforms != null) {

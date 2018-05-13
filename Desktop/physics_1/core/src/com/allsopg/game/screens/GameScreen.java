@@ -48,7 +48,7 @@ public class GameScreen extends ScreenAdapter {
     private FlameChimney flameChimney;
     private FlameChimney flameChimney2;
 
-    // populate reference to self in constructor
+    // populate reference to tbw in constructor
     public GameScreen(TBWGame tbwGame){this.game = tbwGame;}
 
     // size game based on virtual sizes
@@ -63,25 +63,26 @@ public class GameScreen extends ScreenAdapter {
     public void show() {
         super.show();
         // create flame chimneys
-        flameChimney = new FlameChimney(FIRE_CHIMNEY_PATH,SMALL,FIRE_CHIMNEY_ONE_POS,2,4);
-        flameChimney2 = new FlameChimney(FIRE_CHIMNEY_PATH,SMALL,FIRE_CHIMNEY_TWO_POS,2,4);
-        tiledMap = game.getAssetManager().get(Constants.BACKGROUND);
-        orthogonalTiledMapRenderer = new OrthogonalTiledMapRenderer(this.tiledMap,UNITSCALE);
+        flameChimney = new FlameChimney(FIRE_CHIMNEY_PATH,SMALL,FIRE_CHIMNEY_ONE_POS,2,4); //instatiate fire chimney
+        flameChimney2 = new FlameChimney(FIRE_CHIMNEY_PATH,SMALL,FIRE_CHIMNEY_TWO_POS,2,4); //instantiate fire chimney
+        tiledMap = game.getAssetManager().get(Constants.BACKGROUND); // load tile maap
+        orthogonalTiledMapRenderer = new OrthogonalTiledMapRenderer(this.tiledMap,UNITSCALE); //set up projection matrix
         orthogonalTiledMapRenderer.setView(game.camera);
-        if(!WorldManager.isInitialised()){WorldManager.initialise(game,tiledMap);}
+        if(!WorldManager.isInitialised()){WorldManager.initialise(game,tiledMap);} // pass game reference and tile map to TBWgame
         //player
-        playerCar = new PlayerCharacter(PLAYER_ATLAS_PATH,CAR_SIZE,START_POSITION,PLAYER_CAR_REGION_LENGTHS, game);
+        playerCar = new PlayerCharacter(PLAYER_ATLAS_PATH,CAR_SIZE,START_POSITION,PLAYER_CAR_REGION_LENGTHS, game); //instantiate player
         // create mob spawner and initiate spawning method
         mobSpawner = new MobSpawner(game.batch);
         spawnMobs();
         // camera and hud settup
         cameraManager = new CameraManager(game.camera,tiledMap);
-        cameraManager.setTarget(playerCar);
-        gameHUD = new HUD(game.batch, playerCar, game);
+        cameraManager.setTarget(playerCar); // Assign car target to camera
+        gameHUD = new HUD(game.batch, playerCar, game); // instantiate HUD and assign player to controller
 
     }
 
     // Spawns cars and adds to score every wave of cars
+    // currently stubbed to spawn a car per rate of car spawn and add score
     public void spawnMobs(){
         Timer.schedule(new Timer.Task() {
             @Override
@@ -97,10 +98,10 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         frameDelta += delta;
-        flameChimney.update(frameDelta);
+        flameChimney.update(frameDelta); // update flame chineys
         flameChimney2.update(frameDelta);
-        playerCar.update(frameDelta);
-        mobSpawner.update(frameDelta);
+        playerCar.update(frameDelta); // update player car
+        mobSpawner.update(frameDelta); // update all mob cars
         gameHUD.update(delta);
         game.batch.setProjectionMatrix(game.camera.combined);
         UniversalResource.getInstance().tweenManager.update(delta);
@@ -112,13 +113,13 @@ public class GameScreen extends ScreenAdapter {
     // draw all game objects, called post render, drawing cars passed to mob spawner
     private void draw() {
        orthogonalTiledMapRenderer.setView(game.camera);
-       orthogonalTiledMapRenderer.render();
-        cameraManager.update();
+       orthogonalTiledMapRenderer.render(); // render map
+        cameraManager.update(); // update camera
         game.batch.begin();
-        flameChimney2.draw(game.batch);
+        flameChimney2.draw(game.batch); // draw chimneys
         flameChimney.draw(game.batch);
-        playerCar.draw(game.batch);
-        mobSpawner.draw();
+        playerCar.draw(game.batch); //draw player
+        mobSpawner.draw(); // draw method of mob spwner drawsall mob cars
         game.batch.end();
         gameHUD.stage.draw();
         WorldManager.getInstance().debugRender();

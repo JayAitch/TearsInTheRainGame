@@ -89,7 +89,7 @@ public abstract class AnimatedSprite extends Sprite {
         animation = new Animation(Constants.FRAME_DURATION, regions, loopType);
     }
 
-
+    // inner class used to order frames
     protected static class RegionComparator implements Comparator<TextureAtlas.AtlasRegion> {
         @Override
         public int compare(TextureAtlas.AtlasRegion region1, TextureAtlas.AtlasRegion region2) {
